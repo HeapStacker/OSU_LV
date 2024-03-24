@@ -11,13 +11,16 @@ import statistics
 # visina = data[1:, 1]
 # masa = data[1:, 2]
 
-def load_data(file_path):
-    data = np.genfromtxt(file_path, delimiter=',', skip_header=1)
-    data = np.loadtxt("data.csv", delimiter=",", dtype="str")
+def load_data(file_path, rows_to_skip = 0, last_row = 0, data_type = float):
+    # data = np.genfromtxt(file_path, delimiter=',', skip_header=1)
+    if last_row:
+        data = np.loadtxt(file_path, delimiter=",", dtype=data_type, skiprows=rows_to_skip, max_rows=last_row)
+    else:
+        data = np.loadtxt(file_path, delimiter=",", dtype=data_type, skiprows=rows_to_skip)
     return data
 
-file_path = 'data.csv'
-data = load_data(file_path)
+data = load_data("lv2/data.csv", 1)
+print(data.ndim)
 spol = data[:, 0].astype(int)
 visina = data[:, 1]
 masa = data[:, 2]
@@ -63,5 +66,7 @@ print(f"max visina: {max(female_height_)}")
 print(f"srednja visina: {statistics.mean(female_height_)}\n")
 
 # Izdvajanje muškaraca
-ind_muskarci = (data[:, 0] == 1) #vraca polje muskaraca
-visina_muskarci = data[ind_muskarci, 1] # vraca data članove 2. stupca koji su muskarci
+# ind_muskarci = (data[:, 0] == 1) #vraca true/false vrijednosti prvog stupca koji su == 1 (array boolova)
+# print(ind_muskarci.astype(int))
+# visina_muskarci = data[ind_muskarci, 1] # vraca data članove 2. stupca koji su muskarci5
+# print(visina_muskarci[0:5])

@@ -1,7 +1,9 @@
 import numpy as np
 a = np.array([6, 2, 9])
-print(type(a))
-print(a.shape)
+print(type(a)) #vraća klasifikaciju objekta
+print(a.ndim) #vraća dimenziju polja, za npr. matrice je 2
+print(a.shape) #vraća tuple s dužinom, širinom polja u našem slučaju (3,) jer array ima samo 3 broja
+print(a.dtype) #vraća tip podataka u array-u
 print(a[0], a[1], a[2])
 a[1] = 5
 print(a)
@@ -24,9 +26,10 @@ print(b[0, 2], b[0, 1], b[1, 1])
 print()
 print(b[0:6, 0:2]) #izdvajanje (ispisujemo prvih 6 redova ali ispisujemo tako da ih ispišemo do 3. stupca (0:2 ne ispisujemo treći))
 print()
-print(b[:, 1:2]) #ispisujemo svaki red ali samo 2. stupac
+print(b[:, 1]) #ispisujemo svaki red ali samo 2. stupac
 print()
-print(b[:, 0]) #ispisujemo samo pevi član svakog reda
+print(b[:, 0]) #ispisujemo samo prvi član svakog reda
+#kad se radi o ispisivanju samo jednog stupca matrice ispisuje se kao array
 
 #inicijalizacija polja (matrica) s određenim brojevima...
 c = np.zeros((4, 2))
@@ -43,7 +46,7 @@ h = g.tolist()
 print(h)
 c = b.transpose() #ne izgleda dobro kad koristimo jednodimenzionalne nizove (npr h = g.transpose() ispadne isto ko i g)
 print(c)
-d = np.concatenate((a, g,)).tolist()
+d = np.concatenate((a, g)).tolist()
 d = a + g #za razliku od normalnih lista, + ovdje zbraja članove
 d.sort()
 print(d)
@@ -148,7 +151,7 @@ plt.show()
 
 print()
 #primjer 2.5
-img = plt.imread("road.jpg")
+img = plt.imread("lv2/road.jpg")
 img = img[:,:,0].copy()
 print(img.shape)
 print(img.dtype)

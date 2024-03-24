@@ -20,6 +20,7 @@ plt.plot(x, y3, color='green', linewidth=1, linestyle='-.')
 
 # Postavke prikaza
 plt.title('Functions')
+plt.axis([-0.5, 10.5, -1.2, 1.2])
 plt.xlabel('x')
 plt.ylabel('y')
 plt.legend(["sin(x)", "cos(x)", "sin(x) * cos(x)"])
