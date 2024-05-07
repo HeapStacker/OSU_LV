@@ -14,22 +14,22 @@ y3 = np.sin(x) * np.cos(x)
 
 # Nacrtajte funkcije
 plt.figure()
+plt.title('Functions')
+plt.xlabel('x')
+plt.ylabel('y')
 plt.plot(x, y1, color='blue', linewidth=2)
 plt.plot(x, y2, color='red', linewidth=1, linestyle='--')
 plt.plot(x, y3, color='green', linewidth=1, linestyle='-.')
-
-# Postavke prikaza
-plt.title('Functions')
-plt.axis([-0.5, 10.5, -1.2, 1.2])
-plt.xlabel('x')
-plt.ylabel('y')
 plt.legend(["sin(x)", "cos(x)", "sin(x) * cos(x)"])
+func_min = min(y1.min(), y2.min(), y3.min()) - 0.5
+func_max = max(y1.max(), y2.max(), y3.max()) + 0.5
+plt.axis([x.min() - 1, x.max() + 1, func_min, func_max])
 
 #prikaz trapezoida
 plt.figure()
-x = np.array([1, 2, 3, 3, 1])
+x = [1, 2, 3, 3, 1] #može se koristiti samo array a možemo i np.array
 y = np.array([1, 2, 2, 1, 1])
-plt.plot(x , y , 'g' , linewidth = 2 , marker = "*" , markersize = 10)
+plt.plot([1, 2, 3, 3, 1] , y , 'g' , linewidth = 2 , marker = "*" , markersize = 10)
 plt.axis([0,4,0,4])
 plt.xlabel('x')
 plt.ylabel('y')

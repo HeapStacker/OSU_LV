@@ -12,7 +12,5 @@ num_of_once_words_ = 0
 for word in words:
     if words[word] == 1:
         num_of_once_words_ += 1
-print(f"\nBroj rijeci koje se pojavljuju samo jednom je: {num_of_once_words_}")
-for word in words:
-    if words[word] == 1:
         print(word)
+print(f"\nBroj rijeci koje se pojavljuju samo jednom je: {num_of_once_words_}")

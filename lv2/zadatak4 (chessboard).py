@@ -25,6 +25,7 @@ def createSquareField(width = 2, height = 2):
 
 
 plt.figure("White/black boxes")
-plt.imshow(createSquareField(8, 8), cmap = "gray")
+plt.title("Kitchen floor")
+plt.imshow(createSquareField(8, 8)) #možeš staviti argument cmap="gray" da bi slika ispala crno-bijela
 plt.axis("off")
 plt.show()
