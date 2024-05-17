@@ -41,7 +41,7 @@ my_print(countries["code"])
 #ili isto ko i ovo iznad (pošto nema razmaka u "code")...
 my_print(countries.code)
 
-#iloc izdvaja odrežene redove i stupaca [redovi, stupci] Dataframea
+#iloc izdvaja određene redove i stupaca [redovi, stupci] Dataframea
 my_print(countries.iloc[2:, :])
 my_print(countries.iloc[1:3, [0, 1]])
 

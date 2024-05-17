@@ -52,8 +52,3 @@ disp . plot ()
 plt . show ()
 # report
 # print ( classification_report ( y_true , y_pred ) )
-
-#OVO JE LISTA NEKIH CMAP-OVA....
-# plot_color_gradients('Diverging', ['PiYG', 'PRGn', 'BrBG', 'PuOr', 'RdGy', 'RdBu', 'RdYlBu', 'RdYlGn', 'Spectral', 'coolwarm', 'bwr', 'seismic'])
-# plot_color_gradients('Cyclic', ['twilight','twilight_shifted', 'hsv'])
-#...

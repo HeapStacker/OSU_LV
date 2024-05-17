@@ -1,5 +1,6 @@
 Make,Model,Vehicle Class,Engine Size (L),Cylinders,Transmission,Fuel Type,Fuel Consumption City (L/100km),Fuel Consumption Hwy (L/100km),Fuel Consumption Comb (L/100km),Fuel Consumption Comb (mpg),CO2 Emissions (g/km)
 Acura,ILX,Compact,2.4,4,AM8,Z,9.9,7.0,8.6,33,199
+Acura,ILX,Compact,2.4,4,AM8,Z,9.9,7.0,8.6,33,199
 Acura,MDX SH-AWD,SUV: Small,3.5,6,AS9,Z,12.3,9.2,10.9,26,254
 Acura,MDX SH-AWD A-SPEC,SUV: Small,3.5,6,AS9,Z,12.2,9.5,11.0,26,258
 Acura,MDX Hybrid AWD,SUV: Small,3.0,6,AM7,Z,9.1,9.0,9.0,31,210
