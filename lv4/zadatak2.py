@@ -23,22 +23,25 @@ def encode_columns(dataframe, columns_to_encode):
         encoded_array = ohe.fit_transform(dataframe[[column]]).toarray() # veaća numpy arr
         encoded_df = pd.DataFrame(encoded_array, columns=ohe.get_feature_names_out([column]))
         encoded_dfs.append(encoded_df)
-    return pd.concat([dataframe.drop(columns_to_encode, axis=1)] + encoded_dfs, axis=1)
+    return pd.concat(encoded_dfs, axis=1)
 
 def evaluate_regresion_model(original_data, y_real, y_prediction):
     max = max_error(y_real, y_prediction)
     max_error_index = np.argmax(np.abs(y_real - y_prediction))
     print(f"Max Error: {max:.5f}")
-    print("Element with biggest error is...", original_data.values[max_error_index, :])
+    print("Element with biggest error is...", original_data.to_numpy()[max_error_index, :])
 
 
-cols_to_encode = ["Fuel Type", "Make", "Model", "Vehicle Class", "Transmission"]
+cols_to_encode = ["Fuel Type"]
+num_features = ["Fuel Consumption City (L/100km)","Fuel Consumption Hwy (L/100km)","Fuel Consumption Comb (L/100km)","Fuel Consumption Comb (mpg)", "Engine Size (L)", "Cylinders"]
 
-# Spajanje kodiranih stupaca s izvornim podacima (osim kodiranih stupaca)
 data_encoded = encode_columns(data, cols_to_encode)
-X_cols = data_encoded.drop(["CO2 Emissions (g/km)"], axis=1) # ovo je DataFrame
-y_cols = data_encoded["CO2 Emissions (g/km)"] # ovo je Series ( jer nije [[]] nego [] )
-X_train, X_test, y_train, y_test = train_test_split(X_cols, y_cols, test_size=0.2, random_state=1)
+
+X_cols = pd.concat([data[num_features], data_encoded], axis=1)
+y_cols = data["CO2 Emissions (g/km)"]
+
+X_train, X_test, y_train, y_test = train_test_split(X_cols.to_numpy(), y_cols.to_numpy(), test_size=0.2, random_state=1)
+# IPAK !!!! - KORISTI .to_numpy() umjesto .values jer je bolji za kategoričke veličine
 
 # izrada modela...
 regr = lm.LinearRegression()
@@ -48,4 +51,3 @@ regr.fit(X_train, y_train)
 y_test_pred = regr.predict(X_test) 
 
 evaluate_regresion_model(data, y_test, y_test_pred)
-# GREŠKA U IZRAČUNU 100% JER SU ZABILJEŽENE POGREŠKE ABNORMALNE
