@@ -70,12 +70,14 @@ img = img.astype(np.float64) / 255
 w,h,d = img.shape
 img_array = np.reshape(img, (w*h, d))  
 img_array_aprox = img_array.copy()  
+
 print(f'Broj boja u originalnoj slici: {len(np.unique(img_array_aprox, axis=0))}')
 km = KMeans(n_clusters=5, init='random', n_init=5, random_state=0)
 km.fit(img_array_aprox)
 labels = km.predict(img_array_aprox)  
 img_array_aprox = km.cluster_centers_[km.labels_]  
 img_aprox = np.reshape(img_array_aprox, (w, h, d))
+
 print(f'Broj boja u novoj slici: {len(np.unique(img_array_aprox, axis=0))}')
 plt.figure()
 plt.title("Rezultatna slika nakon kvantizacije")
