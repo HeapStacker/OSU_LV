@@ -47,16 +47,20 @@ def k_means_quantization(reshaped_img, img_true_shape, k_param = 5, create_clust
     km.fit(reshaped_img)
     labels = km.predict(reshaped_img)
 
-    # ovaj dio je tu samo ako hoćeš napravit od slike više slika za njezin svaki klaster...
+
+
+    # 7. Elemente slike koji pripadaju jednoj grupi prikažite kao zasebnu binarnu sliku. Što primje ́cujete?
     cluster_imges = []
     if create_cluster_images:
         for i in range(k_param):
-            cluster_img_i = np.zeros_like(reshaped_img) # zeros_like prezervira shape od reshaped_img (za razliku od zeros)
+            # zeros_like prezervira shape od reshaped_img (za razliku od zeros)
+            cluster_img_i = np.zeros_like(reshaped_img)
             for idx, label in enumerate(labels):
                 if label == i:
                     cluster_img_i[idx] = km.cluster_centers_[label]
                 else:
-                    cluster_img_i[idx] = [1, 1, 1]  # Boja koja nije niti jedan od klaster centara (bijela)
+                    # Boja koja nije niti jedan od klaster centara (bijela)
+                    cluster_img_i[idx] = [1, 1, 1]
 
             # moramo reshapeati i cluster slike isto kao i kvantiziranu
             cluster_imges.append(np.reshape(cluster_img_i, img_true_shape))
