@@ -287,3 +287,355 @@ daje klasifikator sa stvarnom vrijednosti oznake:
 TP, TN, FP, FN
 - matrica zabune prikazuje u jednoj matrici ukupan br. TP, FP, TN, FN
 - po defaultu: po stupcima su predikcije modela, po redovima stvarna klasa
+
+
+26. Objasnite točnost, preciznost, odziv i F1 mjeru. Što je preciznost-odziv krivulja i ROC krivulja.
+Kako ih dobivamo?
+
+Točnost je mjera koja pokazuje omjer ispravno klasificiranih primjera u odnosu na ukupan broj primjera.
+
+Preciznost je omjer ispravno predviđenih pozitivnih primjera u odnosu na sve primjere koji su predviđeni kao pozitivni.
+
+Odziv, također poznat kao osjetljivost, je omjer ispravno predviđenih pozitivnih primjera u odnosu na sve stvarne pozitivne primjere.
+
+F1 mjera je harmonijska sredina preciznosti i odziva. Koristi se kao jedinstvena mjera za usporedbu modela kada želimo uzeti u obzir i preciznost i odziv. (ima slika f1 mjera)
+
+ROC krivulja prikazuje odnos između stope istinskih pozitivnih (TPR) i stope lažno pozitivnih (FPR) pri različitim pragovima odlučivanja.
+
+Zaključak...
+Točnost: Opći pokazatelj performansi modela, ali može biti varljiv u nesimetričnim skupovima podataka.
+Preciznost: Bitna kada je važnije koliko su točne pozitivne predikcije.
+Odziv: Bitan kada je važno koliko dobro model prepoznaje sve pozitivne primjere.
+F1 mjera: Korisna kada želimo balans između preciznosti i odziva.
+Preciznost-odziv krivulja: Pomaže razumjeti odnos između preciznosti i odziva pri različitim pragovima.
+ROC krivulja: Prikazuje performanse modela u smislu stope istinskih pozitivnih i lažno pozitivnih pri različitim pragovima.
+
+
+27. Kako se izračunavaju metrike za evaluaciju u slučaju višeklasne klasifikacije? Pokažite na vlastitom primjeru s tri klase.
+
+Za evaluaciju modela u višeklasnoj klasifikaciji, koriste se iste osnovne metrike (točnost, preciznost, odziv, F1 mjera), ali se izračunavaju na različite načine kako bi se prilagodile višeklasnom problemu. Postoje dva osnovna pristupa za računanje ovih metrika:
+- Macro averaging - Računa se metrika za svaku klasu pojedinačno, a zatim se uzima prosjek tih metrika.
+- Micro averaging - Računaju se ukupni TP, FP, TN, i FN za sve klase zajedno, a zatim se izračunava metrika.
+
+	        Pred. A	    Pred. B	    Pred. C
+Stvarno A	40	        10	        5
+Stvarno B	8	        30	        12
+Stvarno C	3	        15	        32
+
+primjer za Macro averaging...
+Za A:  preciznost = 0.784, odziv = 0.755, f1 mjera = 0.755
+Za B:  preciznost = 0.545, odziv = 0.600, f1 mjera = 0.571
+Za C:  preciznost = 0.653, odziv = 0.640, f1 mjera = 0.646
+Macro: preciznost = 0.661, odziv = 0.656, f1 mjera = 0.657
+
+
+28. Objasnite regularizaciju. Na koji način se modificira kriterijska funkcija? Skicirajte efekt regularizacije na jednostavnim primjerima (regresija i klasifikacija).
+
+Regularizacija je tehnika koja se koristi u strojnome učenju kako bi se spriječio overfitting modela na treniranju podacima. To se postiže dodavanjem penala za složenost modela u kriterijsku funkciju.
+
+U praksi, znači odaberemo relativno složeni model, kako ne bismo imali
+podusklađivanje (underfitting), ali onda koristimo regularizaciju kako bismo mu efektivno ograničili složenost.
+
+-- u slikama vidi primjer regularizacije na kod linearne regresije (regularizacija, linearna regresija)
+-- isto vidi regularizaciju u slikama za model klasifikacije
+
+
+29. Objasnite algoritam K najbližih susjeda (KNN). Kako se najčešće definira mjera udaljenosti? Kako broj susjeda utječe na rezultate KNN algoritma? Koje su prednosti i nedostatci algoritma KNN?
+
+- nadziran algoritam strojnog učenja koji se koristi za klasifikaciju i regresiju
+- osnovna ideja KNN-a je predviđanje vrijednosti ili klase novog primjera na temelju "k" najbližih primjera iz skupa podataka za treniranje.
+- koraci algoritma...
+* odabir vrijednosti k (broja susjeda)
+* računanje udaljenosti između novog primjera i svih primjera u skupu podataka za treniranje
+* odabir k najbližih susjeda (prema izračunatim udaljenostima)
+* predikcija - za klasifikaciju (predviđanje klase temelji se na većinskoj klasi među k susjeda), za regresiju (predviđanje vrijednosti temelji se na prosječnoj vrijednosti k susjeda)
+
+Mjere udaljenosti...
+Euklidska - to znaš
+Manhattanska
+Minkowskijeva
+Pogledaj ih u slikama ;) (mjere udaljenosti)
+
+Uzmemo li manji broj susjeda granica će biti više overfitana sa više nepravilnosti, ako uzmemo previše susjeda, granica će biti underfitana.
+
+--prednosti...
+- jednostavnost
+- bez pretpostavki - KNN ne pretpostavlja ništa o distribuciji podataka
+- prilagodljivost - može se koristiti za klasifikaciju i regresiju
+
+--mane...
+- zahtjeva pohranu cijelog skupa podataka za treniranje (računalno skupo)
+- osjetljjivost na skalu značajki (podatke je potrebno normalizirati)
+- problemi s rijtkim ili neinformativnim značajkama (imaju jak utjecaj)
+- odabir vrijednosti k
+
+
+30. Skicirajte princip određivanja optimalne vrijednosti nekog hiperparametra pomoću jednostavne provjere (validacije). Koji su nedostatci ovakvog pristupa?
+
+Koraci jednostavne provjere...
+- podijelite podatke na skup za treniranje i skup za validaciju (npr. 80% podataka za treniranje, 20% za validaciju)
+- za svaku vrijednost hiperparametra, trenirajte model na skupu za treniranje
+- procijenite performanse modela na skupu za validaciju.
+- odaberite vrijednost hiperparametra koja daje najbolje performanse na skupu za validaciju
+
+Evo kako validacija radi jednostavno objašnjeno...
+Skup za učenje (Training Set): Ove slike model koristi da nauči prepoznati pse i mačke.
+
+Skup za validaciju (Validation Set): Ove slike koristiš da provjeriš koji je od tvojih modela (s različitim postavkama) bolji. Ne koristiš ove slike za učenje modela, samo za provjeru.
+
+Skup za testiranje (Test Set): Ove slike koristiš na kraju, jednom kad si izabrao najbolji model na temelju validacijskog skupa, da vidiš koliko je dobar na slikama koje nikad prije nije vidio.
+
+-- pogledaj sliku jednostavna validacija
+
+
+31. Objasnite k-struku unakrsnu validaciju. Kako se određuje optimalna vrijednosti jednog ili više hiperparametara pomoću unakrsne validacije.
+
+K-struka unakrsna validacija je metoda za procjenu performansi modela i određivanje optimalnih hiperparametara.
+
+- Podjela podataka: Podijeli podatke na k jednakih dijelova (foldova).
+- Iteracije:
+* Za svaku iteraciju (ukupno k puta):
+** Koristi k-1 dijelova za treniranje modela.
+** Koristi preostali dio za validaciju.
+- Prosječna točnost: Izračunaj prosječnu točnost modela preko svih k iteracija.
+- Optimalni hiperparametri: Ponavljaj postupak za različite vrijednosti hiperparametara i odaberi one koji daju najbolju prosječnu točnost.
+
+
+32. Od čega se sastoji stablo odlučivanja, koje su prednosti i nedostatci stabla odlučivanja? Što predstavlja mjera nečistoće (npr. entropija) i kako se ona koristi u procesu učenja? Kako je moguće spriječiti pretjerano usklađivanje na podatke stabla odlučivanja?
+
+Stablo odlučivanja se sastoji od čvorova koji predstavljaju odluke i listova koji predstavljaju ishode.
+
+prednosti...
+- Jednostavno za razumijevanje i vizualizaciju.
+- Može rukovati i numeričkim i kategorijskim podacima.
+nedostaci...
+- Može se lako pretrenirati (overfitting).
+- Osjetljivo na male promjene u podacima.
+
+Mjera nečistoće (npr. entropija) se koristi za odlučivanje koje pitanje postaviti u svakom čvoru. Smanjenje nečistoće znači bolje podjele. Sprječavanje pretreniranja postiže se obrezivanjem stabla (pruning) i ograničavanjem dubine stabla.
+
+
+33. Objasnite temeljnu pretpostavku strojeva s potpornim vektorima. Kako se dobiva procjena izlazne veličine pomoću ovog algoritma? Kako se dobiva nelinearna (složena) granica odluke? Objasnite što predstavljaju hiperparametri C i gama.
+
+Temeljna pretpostavka: Traženje granice koja najbolje razdvaja klase.
+
+Procjena izlazne veličine: Temelji se na položaju primjera u odnosu na granicu odluke.
+
+Nelinearna granica odluke: Koristi se kernel trik koji preslikava podatke u višu dimenziju gdje su linearnije razdvojivi.
+
+hiperparametri...
+- C: Kontrolira kaznu za netočno klasificirane primjere.
+- Gama: Definira utjecaj pojedinačnih točaka kod RBF kernela (rbf je radio bazna funkcija).
+
+
+34. Što je cilj nenadziranog učenja? Kakve podatke koristimo i zašto su baš takvi?
+
+Cilj: Otkrivanje skrivenih struktura u podacima bez korištenja oznaka.
+Podaci: Nepoznati ili neoznačeni podaci.
+Zašto takvi podaci: Zato što često nemamo oznake ili želimo otkriti prirodne grupe u podacima.
+
+
+35. Objasnite algoritam K srednjih vrijednosti na jednostavnom problemu s dvije ulazne veličine.. Koji su načini inicijalizacije centara? Objasnite princip određivanja optimalnog broja grupa K.
+
+Opis: Cilj je podijeliti podatke u K grupa (klastera) tako da su podaci unutar svake grupe što sličniji.
+
+koraci algoritma...
+- Inicijaliziraj K centara (nasumično ili pomoću specifičnih metoda).
+- Dodijeli svaki primjer najbližem centru.
+- Ažuriraj centre kao srednje vrijednosti dodijeljenih primjera.
+- Ponavljaj dok se centri ne stabiliziraju.
+
+Algoritam K-srednjih vrijednosti (K-means Algorithm)
+
+PRIMJER....
+Pretpostavimo da imamo skup podataka s dvije ulazne veličine (značajke), na primjer, točke na 2D ravnini:
+
+{ (1, 2), (1, 4), (3, 4), (5, 6), (6, 8), (7, 9) }
+
+Koraci algoritma K-srednjih vrijednosti
+
+1. Inicijalizacija K centara:
+   Pretpostavimo K = 2 (željeni broj klastera).
+   Nasumično odaberemo dva početna centra, recimo (1, 2) i (7, 9).
+
+2. Dodjela:
+   Izračunamo udaljenost svake točke do oba centra i dodijelimo točke najbližem centru.
+   Primjer:
+   - Udaljenost točke (1, 2) do centra (1, 2) je 0.
+   - Udaljenost točke (1, 2) do centra (7, 9) je sqrt((1-7)^2 + (2-9)^2) = sqrt(6^2 + 7^2) = sqrt(85).
+   
+   Ponovimo za sve točke i dobijemo sljedeće dodjele:
+   - Klaster 1: (1, 2), (1, 4), (3, 4)
+   - Klaster 2: (5, 6), (6, 8), (7, 9)
+
+3. Ažuriranje centara:
+   Računamo nove centre kao srednje vrijednosti točaka u svakom klasteru.
+   - Novi centar za Klaster 1: ((1+1+3)/3, (2+4+4)/3) = (1.67, 3.33)
+   - Novi centar za Klaster 2: ((5+6+7)/3, (6+8+9)/3) = (6, 7.67)
+
+4. Ponavljanje:
+   Ponovimo korake dodjele i ažuriranja dok centri ne prestanu značajno mijenjati svoje pozicije.
+
+
+Optimalan broj grupa: Koristi se metoda "lakat" gdje se gleda suma kvadratnih pogrešaka unutar klastera i traži točka gdje dolazi do naglog smanjenja.
+
+
+36. Objasnite kvantizaciju boje digitalne slike pomoću algoritma K srednjih vrijednosti i kako se može postići kompresija slike.
+
+Opis: Smanjenje broja boja u slici.
+
+Koraci:
+- Primijeni K srednjih vrijednosti na piksele slike.
+- Zamijeni svaku boju u slici najbližim centrom.
+- Postignuta kompresija jer se koristi manje boja za prikaz slike.
+
+Na slici ima jako puno različitih boja ali se manjim odabirom boja (grupa) slika također može prikazati.
+
+
+37. Objasnite hijerarhijsko aglomerativno grupiranje na jednostavnom primjeru s dvije ulazne veličine (značajke). Na koje se sve načine može definirati udaljenost (sličnost) dva primjera ili grupe?
+
+Hijerarhijsko aglomerativno grupiranje je metoda klasteriranja koja počinje s svakim podatkovnim primjerom kao zasebnim klasterom i zatim postupno spaja najbliže klastere dok ne ostane samo jedan klaster ili željeni broj klastera. Ovaj postupak se obično prikazuje u dendrogramu, stablu koje pokazuje hijerarhijsku strukturu klastera.
+
+Hijerarhijsko aglomerativno grupiranje (Hierarchical Agglomerative Clustering)
+
+Jednostavan primjer s dvije ulazne veličine
+
+Pretpostavimo da imamo skup podataka s dvije ulazne veličine (značajke), na primjer, točke na 2D ravnini:
+
+{(1, 2), (1, 4), (3, 4), (5, 6), (6, 8), (7, 9)}
+
+Koraci hijerarhijskog aglomerativnog grupiranja
+
+1. Inicijalizacija:
+   Počinjemo s svakim podatkovnim primjerom kao zasebnim klasterom:
+   - Klaster 1: (1, 2)
+   - Klaster 2: (1, 4)
+   - Klaster 3: (3, 4)
+   - Klaster 4: (5, 6)
+   - Klaster 5: (6, 8)
+   - Klaster 6: (7, 9)
+
+2. Izračunavanje udaljenosti:
+   Izračunavamo udaljenost između svih parova klastera (početno između pojedinačnih točaka).
+
+3. Spajanje najbližih klastera:
+   Nađemo par klastera s najmanjom udaljenosti i spojimo ih u novi klaster.
+   Primjer: Udaljenost između (1, 2) i (1, 4) je 2, što je najmanja udaljenost.
+   - Spojimo (1, 2) i (1, 4) u novi klaster:
+     Novi klaster: {(1, 2), (1, 4)}
+
+4. Ažuriranje udaljenosti:
+   Izračunavamo udaljenost između novog klastera i svih preostalih klastera.
+   Ponavljamo korake spajanja i ažuriranja dok ne ostane samo jedan klaster ili dok ne postignemo željeni broj klastera.
+
+Definiranje udaljenosti (sličnosti):
+- Udaljenost najbližeg susjeda (Single Linkage):
+  Udaljenost između dva klastera je udaljenost između njihovih najbližih članova.
+- Udaljenost najdaljeg susjeda (Complete Linkage):
+  Udaljenost između dva klastera je udaljenost između njihovih najudaljenijih članova.
+- Udaljenost srednje vrijednosti (Average Linkage):
+  Udaljenost između dva klastera je prosječna udaljenost između svih parova članova iz oba klastera.
+- Centroidna udaljenost (Centroid Distance):
+  Udaljenost između dva klastera je udaljenost između njihovih centara (centroida).
+- Wardova metoda (Ward's Method):
+  Cilj je minimizirati ukupnu varijansu unutar klastera.
+
+Primjer spajanja:
+- Početni klasteri: {(1, 2)}, {(1, 4)}, {(3, 4)}, {(5, 6)}, {(6, 8)}, {(7, 9)}
+- Spajanje (1, 2) i (1, 4):
+  Novi klaster: {(1, 2), (1, 4)}
+- Sljedeće spajanje: (5, 6) i (6, 8) (udaljenost = sqrt((5-6)^2 + (6-8)^2) = sqrt(1 + 4) = sqrt(5))
+  Novi klaster: {(5, 6), (6, 8)}
+
+Ažuriramo udaljenosti i ponavljamo dok ne ostane jedan klaster ili željeni broj klastera.
+
+
+38. Objasnite princip rada DBSCAN algoritma.
+
+Opis: Algoritam za grupiranje koji ne zahtijeva unaprijed određeni broj klastera.
+
+Princip:
+- Pronalaženje gustih područja podataka.
+- Povezivanje gustih područja u klastere.
+- Oznaka točaka koje nisu u gustim područjima kao outlieri.
+
+
+39. Što je smanjivanje dimenzionalnosti? Zašto se ono radi? Koja su dva pristupa smanjivanju dimenzionalnosti?
+
+Smanjivanje dimenzionalnosti je proces redukcije broja značajki (dimenzija) u skupu podataka. Ovaj postupak je važan zbog nekoliko razloga:
+
+- Smanjenje računalnih zahtjeva: Podaci s manjim brojem dimenzija zahtijevaju manje računalne resurse za pohranu i obradu, što može biti ključno za velike skupove podataka.
+
+- Uklanjanje viška informacija: Visokodimenzionalni prostori često sadrže višak informacija ili šum, što može otežati analizu i interpretaciju podataka.
+
+- Poboljšanje performansi modela: Redukcija dimenzionalnosti može poboljšati performanse modela za predviđanje, posebno kada postoji problema s prenaučenosti (overfitting) ili kada se radi s rijetkim podacima.
+
+Pristupi smanjivanju dimenzionalnosti:
+
+Principal Component Analysis (PCA)
+   - Opis: PCA je statistička metoda koja transformira skup podataka u novi koordinatni sustav gdje su nove varijable (glavne komponente) linearna kombinacija originalnih varijabli.
+   - Cilj: Smanjiti dimenziju podataka dok se maksimizira varijabilnost (raspršenost) podataka.
+   - Kako radi: PCA pronalazi ortogonalne osi (glavne komponente) koje su sortirane prema varijabilitetu podataka. Prva glavna komponenta ima najveću varijabilnost, druga najveću varijabilnost među preostalim podacima itd.
+
+Smanjivanje dimenzionalnosti je ključno za obradu podataka u mnogim područjima zbog svoje sposobnosti da pojednostavi analizu, poboljša performanse modela te olakša vizualizaciju podataka. 
+
+
+40. Objasnite analizu glavnih komponenti. Kako se određuje potrebni broj komponenti? Na konkretnom primjeru (npr. skup podataka koji sadrže lica) objasnite kako se postiže kompresija podataka.
+
+Kompresija slike lica pomoću PCA
+Analiza glavnih komponenti (PCA) koristi se za smanjenje dimenzionalnosti skupa podataka, kao što su slike lica. Primarni koraci u ovom procesu uključuju:
+
+Priprema podataka: Sve slike lica pretvaraju se u vektore značajki duljine 10,000 piksela.
+
+Primjena PCA:
+
+Standardizacija podataka.
+Računanje kovarijacijske matrice.
+Izračunavanje vlastitih vektora i vlastitih vrijednosti.
+Odabir broja komponenti:
+
+Gleda se kumulativna suma vlastitih vrijednosti.
+Odabire se broj komponenti koje objašnjavaju željeni postotak varijance (npr. 95%).
+Transformacija podataka:
+
+Slike lica transformiraju se u novi prostor manje dimenzionalnih glavnih komponenti. Kompresija:
+
+Umjesto originalnih 10,000 značajki, slike lica sada su reprezentirane s manje značajki (npr. 100 glavnih komponenti).
+Manje značajki znači manje podataka za pohranu i brže procesiranje.
+Kompresija slike lica pomoću PCA omogućuje zadržavanje bitnih informacija o oblicima i strukturi lica uz smanjenje količine podataka, što je korisno za prijenos, pohranu i brzu obradu slika.
+
+
+41. Skicirajte umjetni neuron. Koje aktivacijske funkcije se najčešće koriste i kako izgledaju? Kako se izračunava izlaz iz neuron na temelju ulaznih vrijednosti?
+
+
+
+
+42. Izvedite izraze za podešavanje parametara umjetnog neurona s dvije ulazne veličine.
+43. Što je umjetna neuronska mreža? Kakva je to unaprijedna potpuno povezana neuronska mreža?
+Skicirajte potpuno povezanu mrežu s 3 ulazne veličine, 7 neurona u skrivenom sloju i 3 neurona
+u izlaznom sloju. Koliko ovakva mreža ima parametara?
+44. Kako se strukturira izlazni sloj neuronske mreže prilikom rješavanja regresijskih problema, a
+kako prilikom rješavanja klasifikacijskih problema? Navedite po jedan primjer za oba tipa
+problema.
+45. Navedite osnovne korake prilikom izgradnje neuronske mreže. Objasnite načelno princip rada
+algoritma unazadne propagacije (engl. backpropagation algorithm). Što nam omogućava ovaj
+algoritam?
+46. Napišite u općem obliku izraze koji opisuju unaprijednu propagaciju kroz mrežu s jednim
+skrivenim slojem.
+47. Što je epoha i veličina batcha? Što je stopa učenja? Što je inicijalizacija parametara mreže?
+48. Objasnite princip sprječavanja pretjeranog usklađivanja na podatke pomoću ranog zaustavljanja
+(engl. early stopping).
+49. Objasnite tehniku nasumičnog izbacivanja neurona tijekom učenja (engl. dropout).
+50. Što je 2D konvolucija. Objasnite/skicirajte na jednostavnom primjeru filtriranja digitalne slike.
+51. Što je konvolucijski sloj i zašto se koristi? Skicirajte primjer primjene konvolucijskog sloja na neki
+ulazni volumen, naznačite ulazne i izlazne dimenzije. Što je stride? Što je padding? O čemu ovisi
+broj parametara konvolucijskog sloja?
+52. Što je sloj sažimanja po maksimalnoj vrijednosti (eng. max pooling) i zašto se koristi? Skicirajte
+primjer primjene ovog sloja na neki volumen, naznačite ulazne i izlazne dimenzije.
+53. Za danu konvolucijsku mrežu napišite dimenzije pojedinih volumena/izlaza iz slojeva te ukupan
+broj parametara mreže.
+54. Što je augmentacija skupa podataka za učenje? Zašto se koristi?
+55. Navedite najpopularnije „gotove“ strukture konvolucijskih neuronskih mreža koje se mogu
+koristiti kao ekstraktor značajki (što je karakteristično za svaku pojedinu mrežu?). Na kojem
+skupu su najčešće već istrenirane ove mreže i koje su karkateristike ovog skupa?
+56. Što je učenjem prijenosom (engl. transfer learning) i kako se odvija?
