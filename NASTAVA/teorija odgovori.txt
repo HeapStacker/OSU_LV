@@ -1,0 +1,289 @@
+
+1.  Što je strojno učenje? Koja je razlika između eksplicitnog programiranja računala i strojnog učenja? Navedi kakvi problemi se rješavaju pojedinim pristupom (primjeri).
+
+Strojno učenje je područje u okviru AI-a i način programiranja računala s ciljem optimiziranja određenog kriterija uspješnosti koristeći podatke ili prošlo iskustvo.
+
+U eksplicitnom programiranju programer točno napiše upute kako riješiti problem.
+U ML računalo uči iz primjera kako riješiti problem.
+
+Za mnoge složene probleme proces rješavanja nije dan ili ne postoji kvalitetno rješenje (tu se primjenjuje ML).
+
+Primjeri: 
+računalni vid 
+sustavi preporuka
+raspoznavanje govora
+detekcija prevare u online sustavima
+procjena potrošnje energenata, broja korisnika i sl.
+inteligentni sustavi koji se trebaju prilagoditi okolini poput robota
+igranje računalnih igara
+
+
+2.  Navedite tipove strojnog učenja te za svaki tip minimalno dva primjera.
+
+* nadzirano učenje - postoje označeni podatkovni primjeri, treba naći nepoznatu funkcionalu ovisnost između ulazni i izlaznih veličina...
+- klasifikacija (binarna i višeklasna): prepoznavanje rukom pisanih brojeva, detekcija spama
+- regresija: predviđanje cijena nekretnina, procjena trajanja projekta
+
+* nenadzirano učenje - na raspolaganju su samo podaci o ulaznim veličinama i podaci su neoznačeni, pronalaze se skrivene zakonitosti ili uzorci u podacima bez ikakve informacije kakv bi izlaz trebao biti
+- grupiranje podataka (clustering): grupiranje sličnih dokumenata, analiza društvenih mreža, kompresija slike, organizacija računalnih klastera radi veće učinkovitosti
+- smanjivanje dimenzionalnosti: kompresija podataka, vizualizacija podataka, hibridizacija s modelima koji se dobivaju nadziranim učenjem
+- procjena gustoće vjerojatnosti - detekcija nepravilnosti u podacima
+
+* podržano učenje - agent uči optimalno vladanje u okolišu, princip nagrađivanja, uči se iz akcija
+- Tesla automobili koriste RL za kontrolu brzine i okretanja volana
+- optimizacija bota u računalnoj igri
+
+
+3. Nacrtajte tipičan redoslijed radnji kod primjene algoritama strojnog učenja u prediktivnom modeliranju. Objasnite pojedini korak.
+
+Podaci se predobrade.
+Predobrađeni se podijele na skup za učenje i skup za testiranje.
+Iz skupa za učenje izgradi se odabrani tip modela.
+Skup za testiranje primjenjuje se u testiranju modela.
+Dobivaju se izlazni podaci i uspoređuju se s originalnim izlazima.
+
+
+4. Objasnite tabličnu organizaciju podatkovnog skupa i način zapisivanja podatkovnog skupa u matričnoj notaciji.
+
+podatokni skup se radi jednostavnosti zapisuje u tabličnoj formi, gdje redci predstavljaju uzorke a stupci značajke (atribute)
+
+
+5. Što je eksplorativna analiza podataka (EDA)? Koji grafički prikazi se koriste prilikom EDA? Objasnite ih.
+
+Eda je postupak analize skupa podataka kako bi se saznale glavne karakteristike uz pomoć vizualizacije. Koristi se se za otkrivanje obrazaca, otkrivanja anomalija i testiranje hipoteza.
+
+histogram - prikazuje distribuciju numeričkih podataka
+box plot - prikazuje raspodjelu numeričkih podataka kroz kvartile
+scatter plot - prikazuje odnos izemđu dvije numeričke varijable
+barplot - 
+heatmap - prikazuje korelaciju između više varijabli kroz boje
+
+
+6. Objasnite osnovne postupke u predobradi podataka (podatkovnog skupa).
+
+- odabir relevantnih ulaznih veličina od svih dostupnih
+- uklanjanje ili nadomještanje stršećih i izostalih vrijednosti
+- kategoričke varijable potrebno je transformirati u oblik koji zahtijevaju algoritmi strojnog učenja
+- numeričke varijable potrebno je transformirati
+
+
+7. Objasnite kakve su to kategoričke veličine i načine njihovog kodiranja. Navedite primjere.
+
+predstavljaju diskretne kategorije ili oznake
+
+- label encodint: svaka kategorija zamijeni se numeričkom oznakom 
+- one hot encoding: svaka kategorija pretvori se u binarni vektor
+
+
+8. Objasnite načine skaliranja numeričkih veličina. Napišite jednostavan primjer.
+
+- min-max skaliranje (ima u slikama): transformira vrijednosti ulazne veličine u raspon [0, 1]
+- standardizacija ulaznih veličina (ima u slikama): predstavja skaliranje gdje podaci za svaku ulaznu veličinu imaju srednju vrijednost 0 i varijancu 1
+
+Originalne vrijednosti  Min-max skaliranje  Standardizacija
+10                      0                   -1.44280393
+12                      0.2                 -0.94528533
+18                      0.8                 0.54727045
+19                      0.9                 0.79602975
+20                      1                   1.04478905
+
+9. Objasnite podjelu podatkovnog skupa na dva skupa. Koja je uloga svakog skupa podataka?
+
+dijelimo ih na skup za treniranje i skup za testiranje kako bi vidjeli kako se model dobiven iz podataka za testiranja ponađa na neviđenim podacima
+
+
+10. Objasnite nadzirano učenje i princip označavanja dostupnog skupa podataka. Koja dva glavna tipa problema postoje u okviru nadziranog učenja?
+
+U nadziranom učenju postoje klasifikacijski(binarna i višeklasna) i regresijski problemi.
+
+U klasifikacijskim problemima je izlaz kategorička veličina (označava npr. vrstu pingvina ili nešto drugo) dok je u regresijskim problemima izlaz numerička vrijednost.
+
+
+11. Objasnite jednostavnu linearnu regresiju. Objasnite kriterijsku funkciju.
+
+Modelira odnos između jedne ulazne veličine i kontinuirane izlazne veličine.
+y = θ0 + θ1 * x
+θ0 - intercept (presječna točka)
+θ1 - nagib (slope) dy / dx
+
+Kriterijska funkcija koristi se za procjenu koliko je model pogrešan u svojim predikcijama. 
+U kontekstu linearne regresije, najčešće korištena kriterijska funkcija je srednja kvadratna pogreška MSE. 
+
+Cilj treniranja modela linearne regresije je pronaći vrijednosti parametara θ0 i θ1 koje minimiziraju kriterijsku funkciju.
+
+
+12. Objasnite načine procjene parametara linearnog regresijskog modela. Navedite prednosti nedostatke pojedinog pristupa.
+
+Rješenje u zatvorenoj formi (ima u slikama)...
+- dobiva se izravno, uvrštavanjem broja u mat. izraz
+
+- metoda najmanjih kvadrata: θ = (X^T * X)^(-1) * X^T * y
+- prednosti: efikasno je i točno
+- nedostaci: skalabilnost (postaje neefikasno za velike skupove), numerička stabilnost (ako je X^T * X singularna ili blizu singularnosti, inverzija može biti nestabilna)
+
+Numerički iterativni postupak minimizacije...
+- numerički iterativni postupak koristi se kod mnogih modela kod kojih nije moguće eksplicitno izračunati vrijednost
+- gradijentni spust - ideja je krenuti od početnih vrijednosti parametara modela te ih iterativno prepodešavati dok se ne dobiju optimalni parametri
+- predonsti: skalabilnost (dobro se nosi s velikim skupovima), fleksibilnosti (može koristiti za složnije modele i različite tipove f-ija gubitaka)
+-nedostaci: zahtjeva podešavanje hiperparametara (stopa učenja a), konvergencija (može biti spor i osjetljiv na izbor početnih parametara, te može zapeti u lokalnim minimumima)
+-stohastička metoda gradijentnog spusta (iterativni ili online gradijentni spust)
+
+-- u slikama su ostali navedeni načeni procjene parametara linearne regresije
+
+
+13. Što je duljina koraka? Kako utječe na minimizaciju kriterijske funkcije? Objasnite na primjeru modela s jednim parametrom.
+
+duljina koraka ne smije biti premala ne smije ni biti prevelika. Ako je dobro određena, optimizacija traženja lokalnog minimuma pokazat će bolje rezultate. (pogledaj u slikama "duljina koraka a")
+
+
+14. Objasnite višedimenzionalnu linearnu regresiju. Objasnite kriterijsku funkciju.
+
+proširenje jednostavne linearne regresije na slučaj kad imamo više od 1 nezavisne varijable. 
+y = θ0 + θ1 * x1 + θ2 * x2 + ... + θn * xn
+
+
+15. Objasnite načine procjene parametara višedimenzionalnog regresijskog modela.
+
+na isti način ko i jednostavna: 
+- metoda najmanjih kvadrata
+- gradijentni spust 
+
+
+16. Objasnite razliku između batch metode gradijentnog spusta i stohastičke metode gradijentnog
+spusta. Napišite algoritam podešavanja parametara linearnog regresijskog modela stohastičkom gradijentnom metodom. Što je mini-batch stohastička metoda gradijentnog spusta?
+
+U batch metodi gradijentnog spusta, gradijent kriterijske funkcije izračunava se za sve primjere u skupu podataka prije nego se napravi jedno ažuriranje parametara. 
+
+U stohastičkoj metodi gradijentnog spusta, gradijent se izračunava i parametri se ažuriraju za svaki pojedinačni primjer iz skupa podataka.
+
+
+17. Navedite metrike za vrednovanje regresijskih modela.
+
+- srednja kvadratna pogreška (MSE)
+- korijen srednje kvadratne pogreške
+- srednja apsolutna pogreška
+- srednja apsolutna postotna pogreška
+- maksimalna pogreška (kad nam je bitno da greška ne prelazi određenu granicu)
+- r^2 ili koeficijent determinancije - što je veći to je model bolji (najveća vrijednost je 1 a može biti i negativan, model koji za svaki uzorak procjenjuje prosječnu vrijednost izlazne veličine ima r^2 = 0, lakše je usporediti 2 modela korisštenjem r^2 nego MSE)
+
+
+18. Objasnite polinomsku regresiju. Kako se procjenjuju parametri ovakvog modela? Objasnite podusklađivanje i pretjerano usklađivanje na podatke na primjeru polinomske regresije.
+
+Model linearne regresije proširuje se dodatnim potenciranim članovima.  
+Zbog jednostavnosti analizirat ćemo model jednom ulaznom veličinom x...
+y(xî) = θ0 + θ1 * xî + θ2 * xî^2 ...
+
+Parametri se procjenjuju na isti način kao i kod linearne regresije.
+
+Pogledaj sliku određivanja optimalnih parametara polinomke regresije :) 
+(polinomska regresija zatvorena forma)
+
+ako odredimo preveliki hiperparametar K (stupanj polinoma) => overfiting (model pristaje podacima za treniranje al vjerojatno neće pristati podacima za testiranje), ako odaberemo premali K model neće vjerojatno dobro pristati niti jednim podacima
+
+
+19. Na primjeru određivanja parametara pravca objasnite princip RANSAC algoritma. Koje su prednosti i nedostatci RANSAC algoritma?
+
+Ransac (random sample consensus) je iterativna metoda procjene parametara matematičkog modela na temelju podataka u kojima su pristne stršeće vrijenosti.
+
+- odabire se nasumično određen broj podatkovnih primjera iz dostupnog skupa podataka
+- procjena parametara modela na temelju odabranih primjera
+validacija modela odnosno prebrojavanje koliko podatkovnih primjera je u skladu s modelom
+- ponavljaju se koraci 1. do 3. model iz iteracije s najvećim brojem inliera smatra se najboljim modelom
+
+
+20. Navedite tri primjera binarne klasifikacije i tri primjera višeklasne klasifikacije. Što su moguće ulazne veličine u model u svakom navedenom primjeru?
+
+Primjeri binarne klasifikacije
+
+Detekcija neželjene pošte (spam detection)
+Ulazne veličine: tekst email poruke, duljina poruke, broj riječi, broj specifičnih riječi (npr. "free", "buy"), omjer velikih i malih slova, prisutnost privitaka.
+Dijagnoza bolesti (npr. dijabetes)
+
+Dijagnoza bolesti (npr. dijabetes)
+Ulazne veličine: rezultati medicinskih testova (razina glukoze u krvi, krvni tlak), starost, indeks tjelesne mase (BMI), povijest bolesti u obitelji, životne navike (pušenje, tjelovježba).
+Prepoznavanje prijevare s kreditnim karticama
+
+Prepoznavanje prijevare s kreditnim karticama
+Ulazne veličine: iznos transakcije, lokacija transakcije, vrijeme transakcije, povijest kupovina korisnika, vrsta trgovine.
+Primjeri višeklasne klasifikacije
+Prepoznavanje rukopisa (handwritten digit recognition)
+
+Prepoznavanje rukopisa (handwritten digit recognition)
+Ulazne veličine: slike rukom pisanih brojeva (npr. 28x28 piksela), intenzitet piksela, konture i rubovi u slici.
+Klasifikacija vrsta cvijeća (npr. Iris dataset)
+
+Klasifikacija vrsta cvijeća (npr. Iris dataset)
+Ulazne veličine: duljina i širina latica, duljina i širina čašica, boja latica, boja čašica.
+Prepoznavanje emocija iz teksta (sentiment analysis)
+
+Prepoznavanje emocija iz teksta (sentiment analysis)
+Ulazne veličine: tekst komentara ili recenzije, duljina teksta, učestalost pozitivnih i negativnih riječi, ton pisanja, prisutnost određenih fraza.
+
+
+21. Objasnite logističku regresiju: model, kriterijska funkcija, optimizacija parametara.
+
+Logistička regresija je statistički model koji se koristi za binarnu klasifikaciju. Unatoč nazivu, logistička regresija se koristi za klasifikacijske probleme, a ne za regresijske. Model predviđa vjerojatnost da primjer pripada jednoj od dviju klasa.
+
+Model logističke regresije koristi logističku (sigmoidnu) funkciju za pretvaranje linearne kombinacije ulaznih varijabli u vjerojatnost. Linearni dio modela može se zapisati kao:
+
+z = w^T * x + b
+di je x vektor ulaznih značajki, w vektor težina a b pristranost (bias)
+
+sigmoidna funkcija zatim pretvara ovaj linearni izlaz (z) u vjerojatnost...
+
+σ(z) = 1 / (1 + e^(-z))
+
+tako dobivamo...
+P(y = 1 | x) = σ(z) = 1 / (1 + e^(w^T * x + b))
+gdje je P(y = 1 | x) vjerojatnost da primjer pripada klasi 1
+
+Kriterijska funkcija (funkcija gubitka) za logističku regresiju je log-loss ili binarna cross-entropy (pogledaj sliku kriterijske funkcije logističke regresije) 
+
+Ne postoji rješenje u zatvorenoj formi, mora se koristit samo iterativna metoda (npr. gradijentni pad) (pogledaj sliku ;)
+
+
+22. Objasnite OvR i OvO pristup na jednostavnom (2D) problemu s tri klase i dvije ulazne veličine. Koje su prednosti i nedostatci pojedinog pristupa?
+
+u slučaju kad postoji više klasa, i dalje se može primijeniti binarni klasifikator jer se višeklasni klasifikacijski problemi razmatraju kao problemi više binarnih klasifikacijskih problema i moguće su 2. strategije:
+- jedan aspram jedan (OvO) - potrebno je izgraditi K(K - 1) / 2 binarna klasifikatora (svaki se odvaja od svakog pojedinačno) => sporo je za kad ima jako puno klasifikacija
+- jedan naspram ostalih (OvR) - potrebno je izgraditi K binarna klasifikatora (svaka klasa se odvaja od svih ostalih) => mnogo manje područje gdje klasifikacija nije definirana, problematičan je ako je jedna od klasa manja od ostalih npr 1% mogućih slučaja
+
+
+23. Kako izgleda model multinomijalne logističke regresije? Kako se kodira izlazna veličina za potrebe učenja ovakvog modela (objasnite na primjeru klasifikacije rukom pisanih znamenki). Koliko parametara ima model u ovom slučaju?
+
+- proširenje je logističke regresije za slučajeve gdje imamo više od dvije klase
+- koristi softmax funkciju za pretvaranje linearnih kombinacija ulaznih značajki u vjerojatnosti za svaku klasu
+
+- linearne komb. za svaku od K klasa...
+zk = wk^T + bk
+- wk je vektor težina za klasu k
+- bk je pristranost za klasu k
+
+-- pogledaj u slikama softmax funkciju koja pretvara gore navedene linearne kombinacije u vjerojatnosti
+
+- Kodiranje izlazne veličine za učenje...
+Za potrebe učenja, izlazne veličine (oznake) kodiramo korištenjem one-hot enkodiranja. U one-hot enkodiranju.
+Na primjeru klasifikacije rukom pisanih znamenki (0-9), gdje imamo 10 klasa, oznaka "2" bi bila kodirana kao:
+y = [0, 0, 1, 0, 0, 0, 0, 0, 0, 0]
+
+- broj parametara...
+Težine: Svaka klasa  k ima vlastiti vektor teđina wk dimenzije d => ukupan broj težina je K * d
+Pristranost: Svaka klasa k također ima svoj pristranost bk. Dakle, ukkupan broj pristaranosti je K
+Ukupan broj parametara: K * d + K
+
+
+24. Skicirajte softmax regresiju u formi potpuno povezanog sloja sa softmax aktivacijskom funkcijom. Napišite izraze za izračunavanje izlaznih vrijednosti.
+
+- pogledaj u slikama (softmax regresija)
+Izrazi za izračunavanje izlaznih vrijednosti...
+z = Wx + b
+P(y = k | x) = yk = e^(zk) / (suma od j = 1 do K (e^(zj))) -- pogledaj u slikama
+
+
+25. Objasnite matricu zabune. Što predstavlja svaki njen element?
+
+- moguća su četiri slučaja prilikom uspoređivanja rezultata koje
+daje klasifikator sa stvarnom vrijednosti oznake:
+TP, TN, FP, FN
+- matrica zabune prikazuje u jednoj matrici ukupan br. TP, FP, TN, FN
+- po defaultu: po stupcima su predikcije modela, po redovima stvarna klasa

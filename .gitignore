@@ -1,2 +1,4 @@
 #moramo maknuti nepotrebne elemente
 *.keras
+
+my_ml_env

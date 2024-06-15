@@ -19,8 +19,10 @@ for i in range(9):
 
 
 # pripremi podatke (skaliraj ih na raspon [0,1]])
-X_train_n = X_train.astype('float32')/ 255.0
-X_test_n = X_test.astype('float32')/ 255.0
+X_train_n = X_train.astype('float32') / 255.0
+X_test_n = X_test.astype('float32') / 255.0
+
+print(y_test)
 
 # 1-od-K kodiranje
 y_train = to_categorical(y_train)
@@ -28,6 +30,7 @@ y_train = y_train.astype('uint8')
 y_test = to_categorical(y_test)
 y_test = y_test.astype('uint8')
 
+print(y_test)
 # CNN mreza
 model = keras.Sequential()
 model.add(layers.Input(shape=(32,32,3)))
